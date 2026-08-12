@@ -1,15 +1,15 @@
-// Given two integers r and c, return the value at the rth row and cth column (1-indexed) in a Pascal's Triangle.
+// find nth row in pascalTriangl 
 #include <iostream>
 #include <vector>
 using namespace std;
 
 class Solution {
 public:
-     int pascalTriangleI(int r, int c) {
+    vector<int> pascalTriangle_nthrow(int r) {
         vector<vector<int>> triangle(r);
-        int cal=0;
+        vector<int> res_arr;
         for(int i=0;i<r; i++){
-            triangle[i].resize(r+i);
+            triangle[i].resize(1+i);
             for(int j=0;j<=i; j++){
                 if(i==0 || j==0 || j==i){
                     triangle[i][j]=1;
@@ -20,22 +20,25 @@ public:
             }
         }
         for(int i=0;i<r; i++){
-            for(int j=0;j<=i; j++){
-                if(i==r-1 && j==c-1) return cal=triangle[i][j];
-            }           
+            if(i+1==r){
+                for(int j=0;j<triangle[i].size(); j++){
+                    res_arr.push_back(triangle[i][j]);
+                }           
+                return res_arr;
+            }
         }
-        return cal;
+        return res_arr;
     
     }
 
 };
 int main(){
-    int r=5;
-    int c=3;
-    
+    int r=5;//enter row number
     Solution sol; //create object
-    int ans = sol.pascalTriangleI(r,c);
-    cout << ans << endl;
+    vector<int> ans = sol.pascalTriangle_nthrow(r);
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i]<<" ";
+    }
 
     return 0;
 }
